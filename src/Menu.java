@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Menu {
-    public static void menu() {
+    public void mainMenu() {
 
         // Create Scanner instance named in
         Scanner in = new Scanner(System.in);
@@ -9,6 +9,12 @@ public class Menu {
 //        1. Show Available Books
 //        2. Show Checked Out Books
 //        3. Exit - closes out of the application
+        Book[] books = new Book[20];
+        books[0] = new Book(1, "978-0061120084", "\"To Kill a Mockingbird\" by Harper Lee");
+        books[1] = new Book(2, "978-0451524935", "\"1984\" by George Orwell");
+        books[2] = new Book(3, "978-0743273565", "\"The Great Gatsby\" by F. Scott Fitzgerald");
+
+        Library library = new Library(books, this);
 
         int command = -1;
         while (command != 3) {
@@ -26,10 +32,10 @@ public class Menu {
                     """);
             command = in.nextInt();
             if (command == 1) {
-                Task.showAvailableBooks();
+                library.showAvailableBooks();
                 break;
             } else if (command == 2) {
-                Task.showCheckedOutBooks();
+                library.showCheckedOutBooks();
                 break;
             } else if (command == 3) {
                 break;

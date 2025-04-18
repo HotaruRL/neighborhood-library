@@ -1,48 +1,62 @@
-import javax.swing.plaf.synth.SynthOptionPaneUI;
 import java.util.Scanner;
 
-public class Task {
+public class Library {
+    // Create an array named books to hold 20 Book's objects
+    Book[] books = new Book[20];
+    Menu menu;
+
+    Library(Book[] books, Menu m){
+        this.books = books;
+        this.menu = m;
+    }
+
 
     // Create Scanner instance named in
     static Scanner in = new Scanner(System.in);
 
-    public static void showAvailableBooks(){
+    public void showAvailableBooks(){
 
         // Create an empty command variable
-        String command = "";
+        int command = -1;
 
         System.out.println("\nThe following books are available:");
-        for(Book b : books){
+        for(Book b : this.books){
             if (b == null || b.isCheckedOut){
                 continue;
             }
             System.out.printf("\nID: %d\nTitle: %s\nISBN: %s", b.id, b.title, b.isbn);
         }// END OF SHOWING LIST FOR LOOP
 
-        while (!command.equals("X")) {
+        while (command != 0) {
             System.out.println("""
                 Please enter either
                 
                 [Book's ID] - to Check Out a Book
-                X - to go back to the Main menu
+                0 - to go back to the Main menu
                 
                 """);
-            if (command.equals(b.id) && !b.isCheckedOut){
-
-            }else {
-                System.out.println("\nPlease enter either C or X: ");
-            }// END OF CHECK OUT IF
+            command = in.nextInt();
+            for (Book b : this.books) {
+                if (command == b.id && !b.isCheckedOut) {
+                    System.out.println("\nPlease enter your name: ");
+                    b.checkedOutTo = in.nextLine();
+                    b.isCheckedOut = true;
+                    System.out.println("Congrats! You have checked out " + b.id + "-" + b.title);
+                } else {
+                    System.out.println("\nPlease enter either C or X: ");
+                }// END OF CHECK OUT IF
+            }// END OF CHECK OUT FOR LOOP
         }// END OF CHECK OUT MENU WHILE LOOP
-        Menu.menu();
+        this.menu.mainMenu();
     } // END OF showAvailableBooks FUNCTION
 
-    public static void showCheckedOutBooks(){
+    public void showCheckedOutBooks(){
 
         // Create an empty command variable
         String command = "";
 
         System.out.println("\nThe following books are checked out:");
-        for(Book b : Main.books){
+        for(Book b : this.books){
             if (b == null || !b.isCheckedOut){
                 continue;
             }
@@ -67,6 +81,6 @@ public class Task {
                 System.out.println("\nPlease enter either C or X: ");
             } // END OF CHECK IN IF
         }// END OF CHECK IN MENU WHILE LOOP
-        Menu.menu();
+        this.menu.mainMenu();
     }// END OF showCheckedOutBooks FUNCTION
 } // END OF TASK CLASS
