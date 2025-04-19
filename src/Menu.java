@@ -14,7 +14,7 @@ public class Menu {
         books[1] = new Book(2, "978-0451524935", "\"1984\" by George Orwell");
         books[2] = new Book(3, "978-0743273565", "\"The Great Gatsby\" by F. Scott Fitzgerald");
 
-        Library library = new Library(books, this);
+        Inventory inventory = new Inventory(books, this);
 
         int command = -1;
         while (command != 3) {
@@ -32,10 +32,10 @@ public class Menu {
                     """);
             command = in.nextInt();
             if (command == 1) {
-                library.showAvailableBooks();
+                inventory.showAvailableBooks();
                 break;
             } else if (command == 2) {
-                library.showCheckedOutBooks();
+                inventory.showCheckedOutBooks();
                 break;
             } else if (command == 3) {
                 break;
@@ -44,6 +44,6 @@ public class Menu {
                 +"\nPlease try again.\n");
             } //END OF IF
         } // END OF WHILE LOOP
-        System.out.println("\nThank you for using our library!\nHave a good day!");
+        System.out.println("\nThank you for using our inventory!\nHave a good day!");
     } // END OF MENU FUNCTION
 }
