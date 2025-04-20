@@ -56,6 +56,7 @@ public class Book {
     }
 
 
+    // CHECK OUT/IN FUNCTIONS
     public void checkOut(String name) {
         this.isCheckedOut = true;
         this.checkedOutTo = name;
